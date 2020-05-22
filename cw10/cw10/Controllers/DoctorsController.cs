@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cw10.Controllers
 {
-    
+    // Status:
+    // 4 Koncówki są
+    // Metody seedujące są
+    // Migracje są
 
     [ApiController]
     [Route("api/doctors")]
@@ -16,8 +19,7 @@ namespace cw10.Controllers
     {
         private readonly CodeFirstContext context;
         //Dodawanie danych do bazy danych zrobiłem jak w przykłdzie z wykładu w klasie CodeFristContext
-
-        //A taki sposób poniżej znalazłem w internecie
+        //A taki sposób poniżej widziłem w internecie
         //Nie wiem jak jest lepiej, więc zostawie tak jak było na wykładzie
         /*
         public DoctorsController(CodeFirstContext context)
@@ -38,14 +40,10 @@ namespace cw10.Controllers
         */
         //================================================================================================================================================
         [HttpGet("{IdDoctor}")]
-        public IActionResult getDoctor(int? id)
+        public IActionResult getDoctor(int? idDoctor)
         {
-            if (id == null)         // sprawdza czy w linku podany jest w ogóle podane id
-                return NotFound();
-
-            Doctor d = context.Doctor.Find(id);
-
-            if (d == null)          // sprawdza czy id istnieje w bazie danych
+            Doctor d = context.Doctor.Find(idDoctor);
+            if (d == null)          
             {
                 return NotFound("Not found");
             }else
@@ -92,7 +90,7 @@ namespace cw10.Controllers
             context.Doctor.Remove(d);
             context.SaveChanges();
             context.Database.CommitTransaction();
-            return Ok();
+            return Ok("Doctor deleted");
         }
 
     }
