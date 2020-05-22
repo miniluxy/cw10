@@ -94,7 +94,7 @@ namespace cw10.Models
 
             modelBuilder.Entity<PrescriptionMedicament>(x =>
             {
-                x.HasKey(e => new { e.IdMedicament, e.IdPrescription }).HasName("Prescription_Medicament_PK");             
+                x.HasKey(y => new { y.IdMedicament, y.IdPrescription }).HasName("Prescription_Medicament_PK");             
                 x.Property(y => y.Details).HasMaxLength(100).IsRequired();
                 
                 x.HasOne(y => y.Medicament)
